@@ -17,7 +17,8 @@ The workflow automatically processes a landing page through a 4-step pipeline:
 
 ## 📸 Workflow Preview
 
-🧩 *[Replace this text with your workflow screenshot or image reference `image_91d0c1.png` once uploaded to GitHub]*
+<img width="566" height="334" alt="image" src="https://github.com/user-attachments/assets/f2c69d81-9b0b-4ef7-baa0-482a8d8fd285" />
+
 
 ---
 
@@ -42,7 +43,4 @@ The workflow automatically processes a landing page through a 4-step pipeline:
 3. **Configure OpenAI Credentials:** Click on the `OpenAI Chat Model` node and add your OpenAI API Key.
 4. **Test it out:** Paste any landing page URL in the first node and click **Execute Workflow**!
 
----
 
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
