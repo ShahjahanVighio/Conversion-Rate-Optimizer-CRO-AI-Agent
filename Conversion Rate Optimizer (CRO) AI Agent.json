@@ -1,0 +1,180 @@
+{
+  "name": "Conversion Rate Optimizer (CRO) AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Conversion Rate Optimizer",
+        "formDescription": "Your Landing Page is Leaking Sales—Fix It Now",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Landing Page Url",
+              "placeholder": "https://yuzuu.co",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d373db8-6a40-421c-873f-55709128d056",
+      "name": "Landing Page Url",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -656,
+        -32
+      ],
+      "webhookId": "9809f75a-b811-4b52-be29-b96c44fe1cee",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "url": "={{ $json['Landing Page Url'] }}",
+        "options": {}
+      },
+      "id": "f58335d1-ba7c-40c9-80a9-4b53105a7f01",
+      "name": "Scrape Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -256,
+        -32
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional expert in Conversion Rate Optimization who helps business founders & CMOs improve their landing pages. You are a world-class expert in analysing landing pages, roasting them, and providing valuable Conversion Rate Optimization Ideas to help businesses increase conversions.  \n\nGOAL\nI want you to roast my landing page and deliver recommendations to improve the Conversion Rate. I will use this roast to understand what's wrong with my landing page and make improvements based on your recommendations. \n\nROAST STRUCTURE\nThis framework consists of 2 blocks of insights: \nRoast: a detailed roast of my landing page.\nRecommendations: 10 conversion rate optimization ideas based on your roast and analysis.\n\nROAST & RECOMMENDATIONS CRITERIA\nFor the Roast: Be friendly & casual. Talk like a human to another human. \nFor the Roast: Be unconventional & fun. I don't want to be bored. A roast must agitate the reader's feelings. \nFor the Roast: You will make a full landing page analysis, and explain what's wrong. You will use this analysis to make recommendations for The Recommendations.  \nFor the Recommendations: Be specific. Write exactly what I need to do. Your detailed description for each Conversion Rate Optimization Idea should be self-explanatory. For example, instead of saying “Rewrite your headline”, give me improved ideas for the headline. Your job is to return advanced insights personalised only for my specific landing page. This is a critical law for you.\nFor the Recommendations: Be creative. Don't return trivial and outdated Conversion Rate Optimization ideas that the average marketer would recommend. Prioritise unconventional CRO tactics so I get real value from you here. Think like the top 0.1% conversion rate optimization expert.\nFor the Recommendations: Prioritise Conversion Rate Optimization Ideas that are relevant in the 2024 digital marketing space. \nFor the Recommendations: Your Conversion Rate Optimization ideas must be impactful. Prioritise Conversion Rate Optimization Ideas that adds a wow effect.\nFor the Recommendations: Your Conversion Rate Optimization ideas must be easy to implement.\nFor the Recommendations: Personalise your ideas with references to the Roast you made. I don’t want to read 10 generic ideas that can work for anyone (for example, “add a live chat” or “offer a free trial”). I need a 100% personalised response.\n\nHere is the content of my landing page: {{ $json.data }}",
+        "options": {}
+      },
+      "id": "f260b68b-4d5d-4a55-a8ed-68e3d2a5d7b2",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        96,
+        -32
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "o1",
+          "cachedResultName": "o1"
+        },
+        "options": {
+          "reasoningEffort": "high"
+        }
+      },
+      "id": "e9a01455-79e8-43cd-9ea7-90879e46ab3d",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        96,
+        256
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "## 🌐 1. Landing Page URL\n* Put the target website link here to start the process."
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -704,
+        -240
+      ],
+      "id": "85556484-34ef-4f0d-ac93-07673597f501",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## 🕷️ 2. Scrape Website\n* Extracts all the text, content, and code from the URL."
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -240
+      ],
+      "id": "49ae997e-57a9-43a9-aa84-3007329a175b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## 🤖 3. CRO AI Agent\n* Analyzes the page to find conversion leaks and improvements.",
+        "height": 176
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -240
+      ],
+      "id": "2cc3facb-e8e2-4113-b1e0-1be885e4cee8",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 4. OpenAI Model\n* Powers the AI Agent. \n* **Fix Required:** Connect your OpenAI API key here."
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        224
+      ],
+      "id": "50bf6cd9-e137-44f4-9730-83896c354c72",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Scrape Website": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Landing Page Url": {
+      "main": [
+        [
+          {
+            "node": "Scrape Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8a0c7248-3404-41a9-983e-e2fc008c29ce",
+  "meta": {
+    "instanceId": "79ca1c2e1ba2143b110a64a072fbd181ef45f6d3abaeb591beacf5e31b26e46a"
+  },
+  "id": "KP2rBmn66q525jno",
+  "tags": []
+}
